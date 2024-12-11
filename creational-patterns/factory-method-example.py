@@ -7,7 +7,7 @@ class Dialog:
     @abstractmethod
     def create_button(self) -> 'Button': ...
 
-    def render(self):
+    def render(self) -> None:
         button = self.create_button()
         button.on_click(lambda: print('Click!'))
         button.render()
@@ -27,32 +27,30 @@ class WebDialog(Dialog):
 
 class Button(ABC):
     @abstractmethod
-    def render(self): ...
+    def render(self) -> None: ...
 
     @abstractmethod
-    def on_click(self, f: callable): ...
+    def on_click(self, f: callable) -> None: ...
 
 
 class WindowsButton(Button):
     @override
-    def render(self):
+    def render(self) -> None:
         print('Windows button rendered.')
 
     @override
-    def on_click(self, f: callable):
-        f()
-        print('Windows button was clicked.')
+    def on_click(self, f: callable) -> None:
+        print(f'Binding \'on_click\' function to Windows button.')
 
 
 class WebButton(Button):
     @override
-    def render(self):
+    def render(self) -> None:
         print('Web button rendered.')
 
     @override
-    def on_click(self, f: callable):
-        f()
-        print('Web button was clicked.')
+    def on_click(self, f: callable) -> None:
+        print(f'Binding \'on_click\' function to Web button.')
 
 
 def main(system: str) -> None:
@@ -68,8 +66,7 @@ def main(system: str) -> None:
     '''
     Output:
     
-    Click!
-    Windows button was clicked.
+    Binding 'on_click' function to Windows button.
     Windows button rendered.
     '''
 
