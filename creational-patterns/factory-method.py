@@ -1,6 +1,5 @@
-from abc import abstractmethod, ABC
+from abc import ABC, abstractmethod
 from typing import override
-import platform
 
 
 class Dialog:
@@ -53,23 +52,23 @@ class WebButton(Button):
         print(f'Binding \'on_click\' function to Web button.')
 
 
-def main(system: str) -> None:
-    if system == 'Windows':
-        dialog = WindowsDialog()
-    elif system == 'Web':
-        dialog = WebDialog()
-    else:
-        raise Exception(f'Unsupported platform system passed ({system}).')
-
+def main(dialog: Dialog) -> None:
     dialog.render()
 
+
+if __name__ == '__main__':
+    main(WindowsDialog())
     '''
     Output:
-    
+
     Binding 'on_click' function to Windows button.
     Windows button rendered.
     '''
 
-
-if __name__ == '__main__':
-    main(platform.system())  # in my case 'Windows'
+    main(WebDialog())
+    '''
+    Output:
+    
+    Binding 'on_click' function to Web button.
+    Web button rendered.
+    '''
